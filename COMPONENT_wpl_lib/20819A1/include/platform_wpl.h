@@ -1,5 +1,5 @@
 /*
- * Copyright 2019, Cypress Semiconductor Corporation or a subsidiary of
+ * Copyright 2020, Cypress Semiconductor Corporation or a subsidiary of
  * Cypress Semiconductor Corporation. All Rights Reserved.
  *
  * This software, including source code, documentation and related
@@ -48,7 +48,6 @@
 #include "wiced_rtos.h"
 #include "wiced_result.h"
 #include "wiced_power_logger.h"
-#include "tx_api.h"
 
 #ifdef __cplusplus
 extern "C"

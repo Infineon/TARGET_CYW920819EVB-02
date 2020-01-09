@@ -1,5 +1,5 @@
 /*
- * Copyright 2019, Cypress Semiconductor Corporation or a subsidiary of
+ * Copyright 2020, Cypress Semiconductor Corporation or a subsidiary of
  * Cypress Semiconductor Corporation. All Rights Reserved.
  *
  * This software, including source code, documentation and related
@@ -181,6 +181,7 @@ wiced_platform_gpio_config_t;
 /* Platform function */
 void     wiced_platform_init(void);
 uint32_t wiced_platform_get_button_pressed_value(wiced_platform_button_number_t button);
+wiced_bt_gpio_numbers_t wiced_platform_get_function_gpio_pin(wiced_bt_gpio_function_t fn);
 
 /* utility functions */
 void     wiced_platform_register_button_callback(wiced_platform_button_number_t button, void (*userfn)(void*, uint8_t), void* userdata, wiced_platform_button_interrupt_edge_t trigger_edge);

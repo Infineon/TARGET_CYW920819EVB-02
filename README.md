@@ -40,7 +40,7 @@ Step 2: Launch Power Estimator Tool from ModusToolbox 2.0 IDE on the host machin
 
 ### Additional Information
 
-Cypress also offers a purpose-built Bluetooth mesh kit that comes with four boards and several on-board sensors to implement more complete mesh application without any external hardware. To learn more about Cypress Bluetooth mesh evaluation kit, visit [www.cypress.com/CYBT-213043-MESH](https://www.cypress.com/CYBT-213043-MESH).
+Cypress also offers a purpose-built Bluetooth mesh kit that comes with four boards and several on-board sensors to implement more complete mesh application without any external hardware. To learn more about Cypress Bluetooth mesh evaluation kit, visit [www.cypress.com/CYBT-213043-MESH](https://www.cypress.com/CYBT-213043-MESH).<br/>
 
 The CYW20819 device and the CYW920819EVB-02 evaluation kit are supported in ModusToolbox IDE 1.1 (or later). To learn more about ModusToolbox IDE and download the latest version, please visit the ModusToolbox webpage.
 
