@@ -114,19 +114,23 @@ DS2_LOCATION = $(call extract_btp_file_value,ConfigDS2Location,$(CY_BT_FILE_TEXT
 
 # OTA
 ifeq ($(OTA_FW_UPGRADE),1)
+CY_DS2_APP_HEX=$(CY_SHARED_PATH)/dev-kit/bsp/TARGET_$(TARGET)/ds2_app_$(CY_CORE_OTA_FW_UPGRADE_STORE).hex
 CY_APP_OTA=OTA
 CY_APP_OTA_DEFINES=-DOTA_FW_UPGRADE=1
 ifeq ($(CY_APP_SECURE_OTA_FIRMWARE_UPGRADE),1)
 CY_APP_OTA_DEFINES+=-DOTA_SECURE_FIRMWARE_UPGRADE
 endif
-CY_CORE_DS2_OBJ = ./ofu_ds2_lib.a
 ifeq ($(CY_CORE_OTA_FW_UPGRADE_STORE),on_chip_flash)
 CY_APP_OTA_DEFINES+=-DOTA_FW_UPGRADE_EFLASH_COPY
 endif
 ifeq ($(CY_CORE_OTA_FW_UPGRADE_STORE),external_sflash)
 CY_APP_OTA_DEFINES+=-DOTA_FW_UPGRADE_SFLASH_COPY -DENABLE_SFLASH_UPGRADE
 CY_APP_OTA_DEFINES+=-DOTA_SFLASH_SECTOR_SIZE=4096
-#CY_APP_DEFINES += -DOTA_ENCRYPT_SFLASH_DATA
+# default for off-chip encryption
+OFU_UPGRADE_ENCRYPT_SFLASH_DATA ?= 1
+ifeq ($(OFU_UPGRADE_ENCRYPT_SFLASH_DATA),1)
+CY_APP_OTA_DEFINES += -DOTA_ENCRYPT_SFLASH_DATA
+endif
 endif
 endif
 
@@ -141,23 +145,24 @@ endif
 # XIP
 CY_CORE_XIP_SRC=$(CY_RECIPE_SOURCE)
 CY_CORE_XIP_OBJ=$(subst $(CY_SPACE),;,$(filter %.$(CY_TOOLCHAIN_SUFFIX_O),$(CY_CORE_XIP_SRC:%.$(CY_TOOLCHAIN_SUFFIX_C)=%.$(CY_TOOLCHAIN_SUFFIX_O))))
-CY_CORE_APP_SPECIFIC_DS_LEN?=0xe100
+CY_CORE_APP_SPECIFIC_DS_LEN?=0x80
 
 ifeq ($(XIP),xip)
 CY_CORE_APP_XIP_EXTRA=_XIP_
 CY_CORE_LD_DEFS+=XIP_DS_OFFSET=$(CY_CORE_APP_SPECIFIC_DS_LEN)
 CY_CORE_LD_DEFS+=XIP_OBJ=$(CY_CORE_XIP_OBJ)
+# add config "skip" record for xip block
+CY_CORE_CGSLIST+=$(CY_INTERNAL_BASELIB_PATH)/platforms/add_xip_skip_config.cgs
 endif
 
 ifeq ($(OTA_FW_UPGRADE),1)
 ifneq ($(CY_CORE_OTA_FW_UPGRADE_STORE),)
-# place xip code into DS2 partition
-# DS2 config record will install post DS2 XIP entry function
-# the DS config records do not install patches - this code is running on bare ROM
+# DS2 app is prebuilt and supplied as a hex file
+# prebuilt from apps/ota/ds2_app
+# the DS2 config records do not install patches - this code is running on bare ROM
 # for fw update case, sflash image is copied to DS1, then DS1 signature is set active
 # DS2 app will take a small part of on-chip flash
 CY_CORE_DS2_LEN = 0x1000
-CY_CORE_LD_DEFS += APP_DS2_OBJ=$(CY_CORE_DS2_OBJ)
 CY_CORE_LD_DEFS += APP_DS2_LEN=$(CY_CORE_DS2_LEN)
 CY_CORE_DS2_EXTRA = _APPDS2_
 # calculate DS2 offset to override value from BTP file
