@@ -4,11 +4,13 @@
 * Description:
 * Simple wrapper header containing all generated files.
 * This file was automatically generated and should not be modified.
-* Device Configurator: 2.0.0.1332
-* Device Support Library (../../../baselib/20819A1): 2.0.0.2029
+* Tools Package 2.1.0.1266
+* 20819A1
+* personalities 1.0.0.31
+* udd 1.2.0.128
 *
 ********************************************************************************
-* Copyright 2017-2019 Cypress Semiconductor Corporation
+* Copyright 2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");

@@ -4,11 +4,13 @@
 * Description:
 * Establishes all necessary connections between hardware elements.
 * This file was automatically generated and should not be modified.
-* Device Configurator: 2.0.0.1332
-* Device Support Library (../../../baselib/20819A1): 2.0.0.2029
+* Tools Package 2.1.0.1266
+* 20819A1
+* personalities 1.0.0.31
+* udd 1.2.0.128
 *
 ********************************************************************************
-* Copyright 2017-2019 Cypress Semiconductor Corporation
+* Copyright 2020 Cypress Semiconductor Corporation
 * SPDX-License-Identifier: Apache-2.0
 *
 * Licensed under the Apache License, Version 2.0 (the "License");
@@ -32,7 +34,7 @@ extern "C" {
 #endif
 
 #include "cycfg_notices.h"
-void init_cycfg_routing(void);
+static inline void init_cycfg_routing(void) {}
 #define init_cycfg_connectivity() init_cycfg_routing()
 #define ioss_0_pin_11_AUX UNKNOWN
 #define ioss_0_pin_17_AUX UNKNOWN

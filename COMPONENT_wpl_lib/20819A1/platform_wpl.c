@@ -481,26 +481,7 @@ wiced_result_t platform_wpl_rtos_set_semaphore( wpl_semaphore_t* semaphore )
 
 wiced_result_t platform_wpl_rtos_get_semaphore( wpl_semaphore_t* semaphore, uint32_t timeout_ms )
 {
-    wiced_result_t status;
-
-    status = wiced_rtos_get_semaphore( semaphore->semaphore, timeout_ms );
-
-    if ( status == TX_SUCCESS )
-    {
-        return WICED_SUCCESS;
-    }
-    else if ( status == TX_NO_INSTANCE )
-    {
-        return WICED_TIMEOUT;
-    }
-    else if ( status == TX_WAIT_ABORTED )
-    {
-        return WICED_ABORTED;
-    }
-    else
-    {
-        return WICED_ERROR;
-    }
+    return wiced_rtos_get_semaphore( semaphore->semaphore, timeout_ms );
 }
 
 wiced_result_t platform_wpl_rtos_deinit_semaphore( wpl_semaphore_t* semaphore )

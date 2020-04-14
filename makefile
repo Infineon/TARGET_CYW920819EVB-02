@@ -85,6 +85,10 @@ CY_BASELIB_PATH=$(CY_SHARED_PATH)/dev-kit/baselib/$(CY_TARGET_DEVICE)
 # lib-specific includes
 INCLUDES+=
 
+# design.modus is part of the BSP, but Device Configurator must be executed from
+# the application project context, so inhibit it for the BSP library project
+CY_CONFIG_MODUS_FILE:=
+
 # Absolute path to the compiler (Default: GCC in the tools)
 CY_COMPILER_PATH=
 
@@ -116,6 +120,13 @@ CY_GETLIBS_PATH=.
 # if not coming from app makefile (IDE), skip recipe
 ifeq ($(CY_TARGET_DEVICE)$(TARGET),)
 CY_SKIP_RECIPE=1
+endif
+
+# added as work around until make/core 'make vscode' always creates rsp files
+ifneq ($(filter vscode,$(MAKECMDGOALS)),)
+VSCODE_WA:=$(shell $(foreach listfile,inclist.rsp liblist.rsp artifact.rsp,\
+     mkdir -p $(CY_SHARED_PATH)/dev-kit/bsp/TARGET_$(TARGET)/build/$(TARGET)/$(CONFIG)/$(dir $(listfile));\
+     touch $(CY_SHARED_PATH)/dev-kit/bsp/TARGET_$(TARGET)/build/$(TARGET)/$(CONFIG)/$(listfile);))
 endif
 
 include $(CY_TOOLS_DIR)/make/start.mk
