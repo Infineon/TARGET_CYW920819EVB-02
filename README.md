@@ -47,3 +47,6 @@ The CYW20819 device and the CYW920819EVB-02 evaluation kit are supported in Modu
 For more information, see [www.cypress.com/CYW920819EVB-02](https://www.cypress.com/CYW920819EVB-02)
 
 Max UART baud rate is 3M
+
+External 32 kHz LPO is used by default. To operate without external LPO, set USE_32K_EXTERNAL_LPO=0 on
+make command line or edit default value in CYW920819EVB-02.mk.

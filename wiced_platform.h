@@ -178,6 +178,24 @@ wiced_platform_gpio_config_t;
 #define WICED_PUART_TXD          WICED_P32
 #define WICED_PUART_RXD          WICED_P37
 
+/** Pin state for the LED on. */
+#ifndef LED_STATE_ON
+#define LED_STATE_ON          (GPIO_PIN_OUTPUT_LOW)
+#endif
+/** Pin state for the LED off. */
+#ifndef LED_STATE_OFF
+#define LED_STATE_OFF         (GPIO_PIN_OUTPUT_HIGH)
+#endif
+
+/** Pin state for when a button is pressed. */
+#ifndef BTN_PRESSED
+#define BTN_PRESSED           (GPIO_PIN_OUTPUT_LOW)
+#endif
+/** Pin state for when a button is released. */
+#ifndef BTN_OFF
+#define BTN_OFF               (GPIO_PIN_OUTPUT_HIGH)
+#endif
+
 /* Platform function */
 void     wiced_platform_init(void);
 uint32_t wiced_platform_get_button_pressed_value(wiced_platform_button_number_t button);

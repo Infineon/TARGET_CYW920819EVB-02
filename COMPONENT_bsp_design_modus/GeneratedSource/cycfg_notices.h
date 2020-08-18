@@ -8,7 +8,7 @@
 * Tools Package 2.1.0.1266
 * 20819A1
 * personalities 1.0.0.31
-* udd 1.2.0.128
+* udd 1.2.0.370
 *
 ********************************************************************************
 * Copyright 2020 Cypress Semiconductor Corporation

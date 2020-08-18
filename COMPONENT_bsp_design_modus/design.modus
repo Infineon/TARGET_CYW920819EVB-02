@@ -21,6 +21,7 @@
                 <Block location="ioss[0].pin[0]">
                     <Alias value="CYBSP_D2"/>
                     <Alias value="SW3"/>
+                    <Alias value="USER_BUTTON1"/>
                     <Personality template="20x19_pin" version="1.0">
                         <Param id="Type" value="BUTTON"/>
                         <Param id="Index" value="1"/>
@@ -46,7 +47,7 @@
                 </Block>
                 <Block location="ioss[0].pin[11]">
                     <Alias value="CYBSP_RSVD9"/>
-                    <Alias value="SPI_CS"/>
+                    <Alias value="SPI2_CS"/>
                     <Personality template="20x19_pin" version="1.0">
                         <Param id="Type" value="PERIPHERAL"/>
                         <Param id="Index" value="1"/>
@@ -107,7 +108,7 @@
                 </Block>
                 <Block location="ioss[0].pin[17]">
                     <Alias value="CYBSP_D12"/>
-                    <Alias value="SPI_MISO"/>
+                    <Alias value="SPI2_MISO"/>
                     <Personality template="20x19_pin" version="1.0">
                         <Param id="Type" value="PERIPHERAL"/>
                         <Param id="Index" value="1"/>
@@ -254,7 +255,7 @@
                 </Block>
                 <Block location="ioss[0].pin[6]">
                     <Alias value="CYBSP_D11"/>
-                    <Alias value="SPI_MOSI"/>
+                    <Alias value="SPI2_MOSI"/>
                     <Personality template="20x19_pin" version="1.0">
                         <Param id="Type" value="PERIPHERAL"/>
                         <Param id="Index" value="1"/>
@@ -280,7 +281,7 @@
                 </Block>
                 <Block location="ioss[0].pin[9]">
                     <Alias value="CYBSP_D13"/>
-                    <Alias value="SPI_CLK"/>
+                    <Alias value="SPI2_CLK"/>
                     <Personality template="20x19_pin" version="1.0">
                         <Param id="Type" value="PERIPHERAL"/>
                         <Param id="Index" value="1"/>
