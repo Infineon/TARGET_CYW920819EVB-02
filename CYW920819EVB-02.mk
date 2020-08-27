@@ -44,12 +44,6 @@ CHIP_REV=A1
 BLD=A
 
 #
-# floating point and other device specific compiler flags
-#
-CY_CORE_CFLAGS+=-mfloat-abi=soft
-CY_RECIPE_EXTRA_LIBS+=-lgcc
-
-#
 # Define the features for this target
 #
 CY_CORE_OTA_FW_UPGRADE_STORE?=external_sflash
