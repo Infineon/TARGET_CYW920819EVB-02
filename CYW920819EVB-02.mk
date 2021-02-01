@@ -1,10 +1,10 @@
 #
-# Copyright 2016-2020, Cypress Semiconductor Corporation or a subsidiary of
-# Cypress Semiconductor Corporation. All Rights Reserved.
+# Copyright 2016-2021, Cypress Semiconductor Corporation (an Infineon company) or
+# an affiliate of Cypress Semiconductor Corporation.  All rights reserved.
 #
 # This software, including source code, documentation and related
-# materials ("Software"), is owned by Cypress Semiconductor Corporation
-# or one of its subsidiaries ("Cypress") and is protected by and subject to
+# materials ("Software") is owned by Cypress Semiconductor Corporation
+# or one of its affiliates ("Cypress") and is protected by and subject to
 # worldwide patent protection (United States and foreign),
 # United States copyright laws and international treaty provisions.
 # Therefore, you may use this Software only as provided in the license
@@ -13,7 +13,7 @@
 # If no EULA applies, Cypress hereby grants you a personal, non-exclusive,
 # non-transferable license to copy, modify, and compile the Software
 # source code solely for use in connection with Cypress's
-# integrated circuit products. Any reproduction, modification, translation,
+# integrated circuit products.  Any reproduction, modification, translation,
 # compilation, or representation of this Software except as specified
 # above is prohibited without the express written permission of Cypress.
 #
@@ -43,25 +43,20 @@ CHIP=20819
 CHIP_REV=A1
 BLD=A
 
-FLOW_VERSION=$(if $(strip $(CY_GETLIBS_SHARED_PATH)),2,1)
-ifeq ($(FLOW_VERSION),2)
-# Chip specific libs
-COMPONENTS+=$(COMPONENTS_$(CHIP)$(CHIP_REV))
-CY_APP_PATCH_LIBS+=$(CY_$(CHIP)$(CHIP_REV)_APP_PATCH_LIBS)
-# baselib and BSP path variables
+# CSP baselib and BSP path variables
 CY_TARGET_DEVICE?=$(CHIP)$(CHIP_REV)
+CY_APP_PATCH_LIBS+=$(CY_$(CY_TARGET_DEVICE)_APP_PATCH_LIBS)
+COMPONENTS+=$(CY_TARGET_DEVICE) $(COMPONENTS_$(CY_TARGET_DEVICE))
 ifeq ($(SEARCH_$(CY_TARGET_DEVICE)),)
 # internal only - app deploys will always initialize this in mtb.mk
 SEARCH_$(CY_TARGET_DEVICE)?=$(IN_REPO_BTSDK_ROOT)/wiced_btsdk/dev-kit/baselib/$(CY_TARGET_DEVICE)
 SEARCH+=$(SEARCH_$(CY_TARGET_DEVICE))
 endif
 CY_BSP_PATH?=$(SEARCH_TARGET_$(TARGET))
-CY_BASELIB_PATH?=$(SEARCH_$(CHIP)$(CHIP_REV))
+CY_BASELIB_PATH?=$(SEARCH_$(CY_TARGET_DEVICE))/COMPONENT_$(CY_TARGET_DEVICE)
 CY_BASELIB_CORE_PATH?=$(SEARCH_core-make)
 CY_INTERNAL_BASELIB_PATH?=$(patsubst %/,%,$(CY_BASELIB_PATH))
-#else
-#CY_BSP_PATH?=$(CY_SHARED_PATH)/dev-kit/bsp/TARGET_$(TARGET)
-endif
+override CY_DEVICESUPPORT_SEARCH_PATH:=$(call CY_MACRO_SEARCH,devicesupport.xml,$(CY_INTERNAL_BASELIB_PATH))
 
 #
 # Define the features for this target
@@ -72,6 +67,8 @@ CY_CORE_OTA_FW_UPGRADE_STORE?=external_sflash
 USE_32K_EXTERNAL_LPO?=1
 CY_CORE_DEFINES+=-DUSE_32K_EXTERNAL_LPO=$(USE_32K_EXTERNAL_LPO)
 
+# Do RF Calibration to ensure output tx power accuracy
+CY_CORE_DEFINES+=-DDO_RF_CALIBRATION
 # Begin address of flash0, on-chip flash
 CY_FLASH0_BEGIN_ADDR=0x00500000
 # Available flash = 128 * 2048 = 256k
@@ -86,6 +83,12 @@ CY_CORE_APP_ENTRY:=spar_crt_setup
 CY_CORE_DEFINES+=-DHCI_UART_MAX_BAUD=4000000
 # default baud rate is 3M, that is the max supported on macOS
 CY_CORE_DEFINES+=-DHCI_UART_DEFAULT_BAUD=3000000
+
+#
+# pins supporting SWD hardware debugging
+#
+CY_CORE_DEFINES+=-DCY_PLATFORM_SWDCK=WICED_P02
+CY_CORE_DEFINES+=-DCY_PLATFORM_SWDIO=WICED_P03
 
 #
 # Patch variables
