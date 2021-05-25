@@ -16,28 +16,6 @@ CYW920819EVB-02 Evaluation board
 USB Standard-A to Micro-B cable
 Quick Start Guide
 
-
-### Power Estimator Library
-Power Estimator library provides an estimate of power consumed by a CYW920819EVB-02 device. Follow the below mentioned steps to get power estimation of the device:
-
-Step 1: Enable Power Estimator Library add the following in application makefile:
-
-```
-	POWER\_ESTIMATOR=1
-	CY\_APP\_DEFINES += -DWICED\_POWER\_LOGGER\_ENABLE
-	COMPONENTS += wpl\_lib
-```
-Step 2: Launch Power Estimator Tool from ModusToolbox 2.0 IDE on the host machine:
-
-
-* To run the tool: Select CYW920819EVB-02 application -> Select Project Tab -> Select ModusToolbox -> Select Power Estimator
-
-
-* To get Power Esimator User Guide: In the tool go to Help -> View Help
-
-
-* The platform power estimator database file is available at:  `wiced\_btsdk\dev-kit\bsp\TARGET\_CYW920819EVB-02\COMPONENT\_wpl\_lib\20819A1\wpl\_power\_data\CYW920819EVB\_02.xml`
-
 ### Additional Information
 
 Cypress also offers a purpose-built Bluetooth mesh kit that comes with four boards and several on-board sensors to implement more complete mesh application without any external hardware. To learn more about Cypress Bluetooth mesh evaluation kit, visit [www.cypress.com/CYBT-213043-MESH](https://www.cypress.com/CYBT-213043-MESH).<br/>

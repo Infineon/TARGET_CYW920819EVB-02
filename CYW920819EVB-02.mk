@@ -53,10 +53,13 @@ SEARCH_$(CY_TARGET_DEVICE)?=$(IN_REPO_BTSDK_ROOT)/wiced_btsdk/dev-kit/baselib/$(
 SEARCH+=$(SEARCH_$(CY_TARGET_DEVICE))
 endif
 CY_BSP_PATH?=$(SEARCH_TARGET_$(TARGET))
+# ensure the baselib has been instantiated (in case make getlibs had already been performed, but for a BSP with a different CSP
+ifneq ("$(wildcard $(SEARCH_$(CY_TARGET_DEVICE))/COMPONENT_$(CY_TARGET_DEVICE))","")
 CY_BASELIB_PATH?=$(SEARCH_$(CY_TARGET_DEVICE))/COMPONENT_$(CY_TARGET_DEVICE)
 CY_BASELIB_CORE_PATH?=$(SEARCH_core-make)
 CY_INTERNAL_BASELIB_PATH?=$(patsubst %/,%,$(CY_BASELIB_PATH))
 override CY_DEVICESUPPORT_SEARCH_PATH:=$(call CY_MACRO_SEARCH,devicesupport.xml,$(CY_INTERNAL_BASELIB_PATH))
+endif
 
 #
 # Define the features for this target
@@ -120,6 +123,10 @@ define extract_btp_file_value
 $(patsubst $1=%,%,$(filter $1%,$2))
 endef
 
+# these make targets do not need this data and don't work if importing an app
+# that has not yet run make getlibs, so skip it
+ifeq ($(filter import_deps getlibs get_app_info,$(MAKECMDGOALS)),)
+
 # override core-make buggy CY_SPACE till it's fixed
 CY_EMPTY=
 CY_SPACE=$(CY_EMPTY) $(CY_EMPTY)
@@ -140,6 +147,8 @@ VS_LOCATION = $(call extract_btp_file_value,DLConfigVSLocation,$(CY_BT_FILE_TEXT
 VS_LENGTH = $(call extract_btp_file_value,DLConfigVSLength,$(CY_BT_FILE_TEXT))
 DS_LOCATION = $(call extract_btp_file_value,ConfigDSLocation,$(CY_BT_FILE_TEXT))
 DS2_LOCATION = $(call extract_btp_file_value,ConfigDS2Location,$(CY_BT_FILE_TEXT))
+
+endif # end filter import_deps getlibs get_app_info
 
 # OTA
 ifeq ($(OTA_FW_UPGRADE),1)
@@ -215,25 +224,6 @@ CY_CORE_CGS_ARGS+=-O DLConfigVSLength:$(VS_LENGTH)
 endif
 DS_LOCATION=$(shell printf "0x%06X" $$(($(VS_LOCATION)+$(VS_LENGTH))))
 CY_CORE_CGS_ARGS+=-O DLConfigVSLocation:$(VS_LOCATION) -O ConfigDSLocation:$(DS_LOCATION)
-endif
-
-#
-# Power Estimator is supported for CYW920819EVB-02 platform.
-#
-
-ifeq ($(POWER_ESTIMATOR),1)
-# Symbols wrapped by CyPE to log the power events
-  CY_CORE_EXTRA_LD_FLAGS += -Wl,--wrap=wiced_bt_stack_init
-  CY_CORE_EXTRA_LD_FLAGS += -Wl,--wrap=wiced_printf
-  CY_CORE_EXTRA_LD_FLAGS += -Wl,--wrap=wiced_hal_i2c_init
-  CY_CORE_EXTRA_LD_FLAGS += -Wl,--wrap=wiced_hal_i2c_read
-  CY_CORE_EXTRA_LD_FLAGS += -Wl,--wrap=wiced_hal_i2c_write
-  CY_CORE_EXTRA_LD_FLAGS += -Wl,--wrap=wiced_hal_i2c_combined_read
-  CY_CORE_EXTRA_LD_FLAGS += -Wl,--wrap=wiced_set_debug_uart
-  CY_CORE_EXTRA_LD_FLAGS += -Wl,--wrap=wiced_transport_send_data
-  CY_CORE_EXTRA_LD_FLAGS += -Wl,--wrap=wiced_transport_send_buffer
-  CY_CORE_EXTRA_LD_FLAGS += -Wl,--wrap=wiced_hal_puart_configuration
-  CY_CORE_EXTRA_LD_FLAGS += -Wl,--wrap=wiced_sleep_configure
 endif
 
 # defines necessary for flash layout
