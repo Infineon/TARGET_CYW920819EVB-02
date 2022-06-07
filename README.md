@@ -18,11 +18,11 @@ Quick Start Guide
 
 ### Additional Information
 
-Infineon also offers a purpose-built Bluetooth&#174; mesh kit that comes with four boards and several on-board sensors to implement more complete mesh application without any external hardware. To learn more about Infineon Bluetooth&#174; mesh evaluation kit, visit [www.cypress.com/CYBT-213043-MESH](https://www.cypress.com/CYBT-213043-MESH).<br/>
+Infineon also offers a purpose-built Bluetooth&#174; mesh kit that comes with four boards and several on-board sensors to implement more complete mesh application without any external hardware. To learn more about Infineon Bluetooth&#174; mesh evaluation kit, visit [CYBT-213043-MESH](https://www.infineon.com/cms/en/product/evaluation-boards/cybt-213043-mesh/).
 
 The CYW20819 device and the CYW920819EVB-02 evaluation kit are supported in ModusToolbox&#8482; 1.1 (or later). To learn more about ModusToolbox&#8482; and download the latest version, please visit the ModusToolbox&#8482; webpage.
 
-For more information, see [www.cypress.com/CYW920819EVB-02](https://www.cypress.com/CYW920819EVB-02)
+For more information, see [CYW920819EVB-02](https://www.infineon.com/cms/en/product/evaluation-boards/cyw920819evb-02/)
 
 Max UART baud rate is 3M
 
