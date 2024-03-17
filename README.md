@@ -2,9 +2,9 @@
 
 ### Overview
 
-The Infineon CYW920819EVB-02 Evaluation Kit enables you to evaluate and develop single-chip Bluetooth&#174; applications using the CYW20819, an ultra-low-power dual-mode Bluetooth&#174; 5.2 wireless MCU device. The CYW20819 is a stand-alone baseband processor with an integrated 2.4 GHz transceiver supporting Bluetooth&#174; LE/BR/EDR. Manufactured using advanced CMOS low-power process, the CYW20819 employs high integration to reduce external components, thereby minimizing the device’s footprint and cost. This kit helps evaluate device functionality and develop applications quickly for faster time-to-market. CYW20819 supports Bluetooth&#174; SIG-certified Mesh v1.0. CYW20819EVB-02 can also be used to develop Bluetooth&#174; LE Mesh applications on CYW20819 device using ModusToolbox&#8482;.
+The Infineon CYW920819EVB-02 Evaluation Kit enables you to evaluate and develop single-chip Bluetooth&#174; applications using the CYW20819, an ultra-low-power dual-mode Bluetooth&#174; 5.4 wireless MCU device. The CYW20819 is a stand-alone baseband processor with an integrated 2.4 GHz transceiver supporting Bluetooth&#174; LE/BR/EDR. Manufactured using advanced CMOS low-power process, the CYW20819 employs high integration to reduce external components, thereby minimizing the device’s footprint and cost. This kit helps evaluate device functionality and develop applications quickly for faster time-to-market. CYW20819 supports Bluetooth&#174; SIG-certified Mesh v1.0. CYW20819EVB-02 can also be used to develop Bluetooth&#174; LE Mesh applications on CYW20819 device using ModusToolbox&#8482;.
 
-* 62-FBGA CYW20819 dual-mode (LE/BR/EDR) Bluetooth&#174; 5.2-compliant wireless MCU
+* 62-FBGA CYW20819 dual-mode (LE/BR/EDR) Bluetooth&#174; 5.4-compliant wireless MCU
 * Arduino compatible headers for hardware expansion
 * On-board sensors - a 9-axis motion sensor (3D digital linear acceleration sensor, 3D digital angular rate sensor, and 3D digital magnetic sensor) and a thermistor
 * User switch and LEDs
